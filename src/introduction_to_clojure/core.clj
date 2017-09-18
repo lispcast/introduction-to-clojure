@@ -28,21 +28,6 @@
   (grab :butter)
   (add-to-bowl))
 
-(defn add [ingredient]
-  (cond
-    (= ingredient :egg)
-    (add-egg)
-    (= ingredient :milk)
-    (add-milk)
-    (= ingredient :flour)
-    (add-flour)
-    (= ingredient :sugar)
-    (add-sugar)
-    (= ingredient :butter)
-    (add-butter)
-    :else
-    (println "Unknown ingredient:" ingredient)))
-
 (defn bake-cake []
   (add :egg)
   (add :egg)
@@ -100,4 +85,17 @@
       (add-to-bowl))
     (do
       (println "This function only works on simple ingredients. You asked me to add" ingredient)
+      :error)))
+
+(defn add [ingredient]
+  (cond
+    (squeezed? ingredient)
+    (add-squeezed ingredient)
+    (scooped? ingredient)
+    (add-scooped ingredient)
+    (simple? ingredient)
+    (add-simple ingredient)
+    :else
+    (do
+      (println "I do not know the ingredient" ingredient)
       :error)))
