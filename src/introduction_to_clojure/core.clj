@@ -99,3 +99,8 @@
     (do
       (println "I do not know the ingredient" ingredient)
       :error)))
+
+(defn add-eggs [n]
+  (dotimes [e n]
+    (add-egg))
+  :ok)
