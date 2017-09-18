@@ -54,3 +54,14 @@
   (pour-into-pan)
   (bake-pan 25)
   (cool-pan))
+
+(defn scooped? [ingredient]
+  (cond
+    (= ingredient :milk)
+    true
+    (= ingredient :flour)
+    true
+    (= ingredient :sugar)
+    true
+    :else
+    false))
