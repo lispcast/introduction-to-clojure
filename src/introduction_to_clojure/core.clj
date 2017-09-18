@@ -45,36 +45,6 @@
 (defn simple? [ingredient]
   (= ingredient :butter))
 
-(defn add-scooped [ingredient]
-  (if (scooped? ingredient)
-    (do
-      (grab :cup)
-      (scoop ingredient)
-      (add-to-bowl)
-      (release))
-    (do
-      (println "This function only works on scooped ingredients. You asked me to scoop" ingredient)
-      :error)))
-
-(defn add-squeezed [ingredient]
-  (if (squeezed? ingredient)
-    (do
-      (grab ingredient)
-      (squeeze)
-      (add-to-bowl))
-    (do
-      (println "This function only works on squeezed ingredients. You asked me to squeeze" ingredient)
-      :error)))
-
-(defn add-simple [ingredient]
-  (if (simple? ingredient)
-    (do
-      (grab ingredient)
-      (add-to-bowl))
-    (do
-      (println "This function only works on simple ingredients. You asked me to add" ingredient)
-      :error)))
-
 (defn add [ingredient]
   (cond
     (squeezed? ingredient)
@@ -122,3 +92,48 @@
   (pour-into-pan)
   (bake-pan 25)
   (cool-pan))
+
+(defn add-squeezed
+  ([ingredient amount]
+    (if (squeezed? ingredient)
+      (do
+        (dotimes [i amount]
+          (grab ingredient)
+          (squeeze)
+          (add-to-bowl))
+        :ok)
+      (do
+        (println "This function only works on squeezed ingredients. You asked me to squeeze" ingredient)
+        :error)))
+  ([ingredient]
+   (add-squeezed ingredient 1)))
+
+(defn add-scooped
+  ([ingredient amount]
+    (if (scooped? ingredient)
+      (do
+        (dotimes [i amount]
+          (grab :cup)
+          (scoop ingredient)
+          (add-to-bowl)
+          (release))
+        :ok)
+      (do
+        (println "This function only works on scooped ingredients. You asked me to scoop" ingredient)
+        :error)))
+  ([ingredient]
+   (add-scooped ingredient 1)))
+
+(defn add-simple
+  ([ingredient amount]
+    (if (simple? ingredient)
+      (do
+        (dotimes [i amount]
+          (grab ingredient)
+          (add-to-bowl))
+        :ok)
+      (do
+        (println "This function only works on simple ingredients. You asked me to add" ingredient)
+        :error)))
+  ([ingredient]
+    (add-simple ingredient 1)))
