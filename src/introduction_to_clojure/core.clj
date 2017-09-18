@@ -28,18 +28,6 @@
   (grab :butter)
   (add-to-bowl))
 
-(defn bake-cake []
-  (add :egg)
-  (add :egg)
-  (add :flour)
-  (add :flour)
-  (add :milk)
-  (add :sugar)
-  (mix)
-  (pour-into-pan)
-  (bake-pan 25)
-  (cool-pan))
-
 (defn scooped? [ingredient]
   (cond
     (= ingredient :milk)
@@ -125,3 +113,12 @@
     (add-butter))
   :ok)
 
+(defn bake-cake []
+  (add-eggs 2)
+  (add-flour-cups 2)
+  (add-milk-cups 1)
+  (add-sugar-cups 1)
+  (mix)
+  (pour-into-pan)
+  (bake-pan 25)
+  (cool-pan))
