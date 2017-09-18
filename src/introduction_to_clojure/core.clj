@@ -45,19 +45,6 @@
 (defn simple? [ingredient]
   (= ingredient :butter))
 
-(defn add [ingredient]
-  (cond
-    (squeezed? ingredient)
-    (add-squeezed ingredient)
-    (scooped? ingredient)
-    (add-scooped ingredient)
-    (simple? ingredient)
-    (add-simple ingredient)
-    :else
-    (do
-      (println "I do not know the ingredient" ingredient)
-      :error)))
-
 (defn add-eggs [n]
   (dotimes [e n]
     (add-egg))
@@ -137,3 +124,19 @@
         :error)))
   ([ingredient]
     (add-simple ingredient 1)))
+
+(defn add
+  ([ingredient]
+    (add ingredient 1))
+  ([ingredient amount]
+    (cond
+      (squeezed? ingredient)
+      (add-squeezed ingredient amount)
+      (scooped? ingredient)
+      (add-scooped ingredient amount)
+      (simple? ingredient)
+      (add-simple ingredient amount)
+      :else
+      (do
+        (println "I do not know the ingredient" ingredient)
+        :error))))
