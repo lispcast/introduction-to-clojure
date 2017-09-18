@@ -151,3 +151,5 @@
   (bake-pan 30)
   (cool-pan))
 
+(defn -main []
+  (println "Hello, World!"))
