@@ -68,3 +68,7 @@
 
 (defn squeezed? [ingredient]
   (= ingredient :egg))
+
+(defn simple? [ingredient]
+  (= ingredient :butter))
+
