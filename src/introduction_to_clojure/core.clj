@@ -27,3 +27,18 @@
 (defn add-butter []
   (grab :butter)
   (add-to-bowl))
+
+(defn bake-cake []
+  (add-flour)
+  (add-flour)
+  (add-egg)
+  (add-egg)
+  (add-milk)
+  (add-sugar)
+
+  (mix)
+  (pour-into-pan)
+  (bake-pan 25)
+
+  (cool-pan))
+
