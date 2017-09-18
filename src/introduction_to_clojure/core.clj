@@ -42,3 +42,17 @@
 
   (cool-pan))
 
+(defn add [ingredient]
+  (cond
+    (= ingredient :egg)
+    (add-egg)
+    (= ingredient :milk)
+    (add-milk)
+    (= ingredient :flour)
+    (add-flour)
+    (= ingredient :sugar)
+    (add-sugar)
+    (= ingredient :butter)
+    (add-butter)
+    :else
+    (println "Unknown ingredient:" ingredient)))
