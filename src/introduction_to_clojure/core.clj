@@ -28,20 +28,6 @@
   (grab :butter)
   (add-to-bowl))
 
-(defn bake-cake []
-  (add-flour)
-  (add-flour)
-  (add-egg)
-  (add-egg)
-  (add-milk)
-  (add-sugar)
-
-  (mix)
-  (pour-into-pan)
-  (bake-pan 25)
-
-  (cool-pan))
-
 (defn add [ingredient]
   (cond
     (= ingredient :egg)
@@ -56,3 +42,15 @@
     (add-butter)
     :else
     (println "Unknown ingredient:" ingredient)))
+
+(defn bake-cake []
+  (add :egg)
+  (add :egg)
+  (add :flour)
+  (add :flour)
+  (add :milk)
+  (add :sugar)
+  (mix)
+  (pour-into-pan)
+  (bake-pan 25)
+  (cool-pan))
