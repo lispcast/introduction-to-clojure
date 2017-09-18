@@ -140,3 +140,13 @@
       (do
         (println "I do not know the ingredient" ingredient)
         :error))))
+
+(defn bake-cake []
+  (add :egg 2)
+  (add :flour 2)
+  (add :milk 1)
+  (add :sugar 1)
+  (mix)
+  (pour-into-pan)
+  (bake-pan 25)
+  (cool-pan))
