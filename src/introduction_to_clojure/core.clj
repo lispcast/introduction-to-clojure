@@ -127,6 +127,11 @@
      :else
      (error "I do not know the ingredient" ingredient))))
 
+(def pantry-ingredients #{:flour :sugar})
+
+(defn from-pantry? [ingredient]
+  (contains? pantry-ingredients ingredient))
+
 (defn bake-cake []
   (add :egg 2)
   (add :flour 2)
