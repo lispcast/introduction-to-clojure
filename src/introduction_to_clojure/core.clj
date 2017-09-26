@@ -163,6 +163,20 @@
           (unload ingredient)))
       (error "This function only works on ingredients that are stored in the fridge. You asked me to fetch" ingredient))))
 
+(defn fetch-ingredient
+  ([ingredient]
+    (fetch-ingredient ingredient 1))
+  ([ingredient amount]
+    (cond
+      (from-fridge? ingredient)
+      (fetch-from-fridge ingredient amount)
+
+      (from-pantry? ingredient)
+      (fetch-from-pantry ingredient amount)
+
+      :else
+      (error "I don't know where to get" ingredient))))
+
 (defn bake-cake []
   (add :egg 2)
   (add :flour 2)
@@ -186,6 +200,8 @@
 (defn -main []
   (bake-cake)
   (bake-cookies)
-  (fetch-from-pantry :flour 12)
-  (fetch-from-fridge :egg 45)
+  (fetch-ingredient :flour 23)
+  (fetch-ingredient :sugar 56)
+  (fetch-ingredient :milk 10)
+  (fetch-ingredient :egg 90)
   (status))
