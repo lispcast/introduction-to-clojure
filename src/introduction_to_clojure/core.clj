@@ -135,6 +135,34 @@
 (defn from-fridge? [ingredient]
   (contains? fridge-ingredients ingredient))
 
+(defn fetch-from-pantry
+  ([ingredient]
+    (fetch-from-pantry ingredient 1))
+  ([ingredient amount]
+    (if (from-pantry? ingredient)
+      (do
+        (go-to :pantry)
+        (dotimes [i amount]
+          (load-up ingredient))
+        (go-to :prep-area)
+        (dotimes [i amount]
+          (unload ingredient)))
+      (error "This function only works on ingredients that are stored in the pantry. You asked me to fetch" ingredient))))
+
+(defn fetch-from-fridge
+  ([ingredient]
+    (fetch-from-fridge ingredient 1))
+  ([ingredient amount]
+    (if (from-fridge? ingredient)
+      (do
+        (go-to :fridge)
+        (dotimes [i amount]
+          (load-up ingredient))
+        (go-to :prep-area)
+        (dotimes [i amount]
+          (unload ingredient)))
+      (error "This function only works on ingredients that are stored in the fridge. You asked me to fetch" ingredient))))
+
 (defn bake-cake []
   (add :egg 2)
   (add :flour 2)
@@ -157,4 +185,7 @@
 
 (defn -main []
   (bake-cake)
-  (bake-cookies))
+  (bake-cookies)
+  (fetch-from-pantry :flour 12)
+  (fetch-from-fridge :egg 45)
+  (status))
