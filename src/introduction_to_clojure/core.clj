@@ -219,11 +219,27 @@
   (bake-pan 30)
   (cool-pan))
 
+(defn day-at-the-bakery []
+  (doseq [order (get-morning-orders)]
+    (let [items (get order :items)]
+      (dotimes [n (get items :cake 0)]
+        (fetch-list {:egg 2
+                     :flour 2
+                     :milk 1
+                     :sugar 1})
+        (let [rack-id (bake-cake)]
+          (delivery {:orderid (get order :orderid)
+                     :address (get order :address)
+                     :rackids [rack-id]})))
+      (dotimes [n (get items :cookies 0)]
+        (fetch-list {:egg 1
+                     :flour 1
+                     :butter 1
+                     :sugar 1})
+        (let [rack-id (bake-cookies)]
+          (delivery {:orderid (get order :orderid)
+                     :address (get order :address)
+                     :rackids [rack-id]}))))))
+
 (defn -main []
-  (bake-cake)
-  (bake-cookies)
-  (fetch-ingredient :flour 23)
-  (fetch-ingredient :sugar 56)
-  (fetch-ingredient :milk 10)
-  (fetch-ingredient :egg 90)
-  (status))
+  (day-at-the-bakery))
