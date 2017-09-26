@@ -152,4 +152,5 @@
   (cool-pan))
 
 (defn -main []
-  (println "Hello, World!"))
+  (bake-cake)
+  (bake-cookies))
