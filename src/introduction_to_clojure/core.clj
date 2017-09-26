@@ -199,6 +199,9 @@
     (doseq [ingredient (get locations location)]
       (unload-amount ingredient (get shopping-list ingredient 0)))))
 
+(defn add-ingredients [a b]
+  (merge-with + a b))
+
 (defn bake-cake []
   (add :egg 2)
   (add :flour 2)
