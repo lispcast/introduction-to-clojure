@@ -1,6 +1,10 @@
 (ns introduction-to-clojure.core
   (:require [bakery.core :refer :all]))
 
+(defn error [& args]
+  (apply println args)
+  :error)
+
 (defn add-egg []
   (grab :egg)
   (squeeze)
