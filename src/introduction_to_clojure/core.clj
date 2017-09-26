@@ -219,6 +219,11 @@
                                                    :butter 1
                                                    :sugar 1}))))
 
+(defn orders->ingredients [orders]
+  (reduce add-ingredients {}
+    (for [order orders]
+      (order->ingredients order))))
+
 (defn bake-cake []
   (add :egg 2)
   (add :flour 2)
