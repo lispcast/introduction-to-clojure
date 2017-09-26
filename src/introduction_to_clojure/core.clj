@@ -207,6 +207,18 @@
     (for [kv ingredients]
       [(first kv) (* n (second kv))])))
 
+(defn order->ingredients [order]
+  (let [items (get order :items)]
+    (add-ingredients
+      (multiply-ingredients (get items :cake 0) {:egg 2
+                                                 :flour 2
+                                                 :sugar 1
+                                                 :milk 1})
+      (multiply-ingredients (get items :cookie 0) {:egg 1
+                                                   :flour 1
+                                                   :butter 1
+                                                   :sugar 1}))))
+
 (defn bake-cake []
   (add :egg 2)
   (add :flour 2)
