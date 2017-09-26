@@ -185,20 +185,19 @@
   (dotimes [i amount]
     (unload ingredient)))
 
-(defn fetch-list [shopping-list]
-  (go-to :pantry)
-  (doseq [ingredient pantry-ingredients]
-    (load-up-amount ingredient (get shopping-list ingredient 0)))
+(def locations {:pantry pantry-ingredients
+                :fridge fridge-ingredients})
 
-  (go-to :fridge)
-  (doseq [ingredient fridge-ingredients]
-    (load-up-amount ingredient (get shopping-list ingredient 0)))
+(defn fetch-list [shopping-list]
+  (doseq [location (keys locations)]
+    (go-to location)
+    (doseq [ingredient (get locations location)]
+      (load-up-amount ingredient (get shopping-list ingredient 0))))
 
   (go-to :prep-area)
-  (doseq [ingredient pantry-ingredients]
-    (unload-amount ingredient (get shopping-list ingredient 0)))
-  (doseq [ingredient fridge-ingredients]
-    (unload-amount ingredient (get shopping-list ingredient 0))))
+  (doseq [location (keys locations)]
+    (doseq [ingredient (get locations location)]
+      (unload-amount ingredient (get shopping-list ingredient 0)))))
 
 (defn bake-cake []
   (add :egg 2)
