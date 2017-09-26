@@ -244,22 +244,28 @@
   (bake-pan 30)
   (cool-pan))
 
+(defn bake [item]
+  (cond
+    (= item :cake)
+    (bake-cake)
+    (= item :cookies)
+    (bake-cookies)
+    :else
+    (error "I don't know how to bake" item)))
+
 (defn day-at-the-bakery []
   (let [orders (get-morning-orders)
         ingredients (orders->ingredients orders)]
     (fetch-list ingredients)
     (doseq [order orders]
-      (let [items (get order :items)]
-        (dotimes [n (get items :cake 0)]
-          (let [rack-id (bake-cake)]
-            (delivery {:orderid (get order :orderid)
-                       :address (get order :address)
-                       :rackids [rack-id]})))
-        (dotimes [n (get items :cookies 0)]
-          (let [rack-id (bake-cookies)]
-            (delivery {:orderid (get order :orderid)
-                       :address (get order :address)
-                       :rackids [rack-id]})))))))
+      (let [items (get order :items)
+            racks (for [kv items
+                        i (range (second kv))]
+                    (bake (first kv)))
+            receipt {:orderid (get order :orderid)
+                     :address (get order :address)
+                     :rackids racks}]
+        (delivery receipt)))))
 
 (defn -main []
   (day-at-the-bakery))
