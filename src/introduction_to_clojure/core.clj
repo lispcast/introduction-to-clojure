@@ -187,20 +187,18 @@
 
 (defn fetch-list [shopping-list]
   (go-to :pantry)
-  (load-up-amount :flour (get shopping-list :flour 0))
-  (load-up-amount :sugar (get shopping-list :sugar 0))
+  (doseq [ingredient pantry-ingredients]
+    (load-up-amount ingredient (get shopping-list ingredient 0)))
 
   (go-to :fridge)
-  (load-up-amount :egg (get shopping-list :egg 0))
-  (load-up-amount :milk (get shopping-list :milk 0))
-  (load-up-amount :butter (get shopping-list :butter 0))
+  (doseq [ingredient fridge-ingredients]
+    (load-up-amount ingredient (get shopping-list ingredient 0)))
 
   (go-to :prep-area)
-  (unload-amount :flour (get shopping-list :flour 0))
-  (unload-amount :sugar (get shopping-list :sugar 0))
-  (unload-amount :egg (get shopping-list :egg 0))
-  (unload-amount :milk (get shopping-list :milk 0))
-  (unload-amount :butter (get shopping-list :butter 0)))
+  (doseq [ingredient pantry-ingredients]
+    (unload-amount ingredient (get shopping-list ingredient 0)))
+  (doseq [ingredient fridge-ingredients]
+    (unload-amount ingredient (get shopping-list ingredient 0))))
 
 (defn bake-cake []
   (add :egg 2)
