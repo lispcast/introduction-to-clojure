@@ -202,6 +202,11 @@
 (defn add-ingredients [a b]
   (merge-with + a b))
 
+(defn multiply-ingredients [n ingredients]
+  (into {}
+    (for [kv ingredients]
+      [(first kv) (* n (second kv))])))
+
 (defn bake-cake []
   (add :egg 2)
   (add :flour 2)
