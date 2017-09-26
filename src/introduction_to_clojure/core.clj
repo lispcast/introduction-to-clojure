@@ -132,6 +132,11 @@
 (defn from-pantry? [ingredient]
   (contains? pantry-ingredients ingredient))
 
+(def fridge-ingredients #{:milk :egg :butter})
+
+(defn from-fridge? [ingredient]
+  (contains? fridge-ingredients ingredient))
+
 (defn bake-cake []
   (add :egg 2)
   (add :flour 2)
