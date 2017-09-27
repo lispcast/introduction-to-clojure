@@ -69,73 +69,20 @@
                          (add-to-bowl))
                        (release))})
 
-(defn scooped? [ingredient]
+(defn usage-type [ingredient]
   (let [ingredients (get baking :ingredients)
         info (get ingredients ingredient)]
-    (= :scooped (get info :usage))))
-
-(defn squeezed? [ingredient]
-  (let [ingredients (get baking :ingredients)
-        info (get ingredients ingredient)]
-    (= :squeezed (get info :usage))))
-
-(defn simple? [ingredient]
-  (let [ingredients (get baking :ingredients)
-        info (get ingredients ingredient)]
-    (= :simple (get info :usage))))
-
-(defn add-squeezed
-  ([ingredient amount]
-   (if (squeezed? ingredient)
-     (do
-       (dotimes [i amount]
-         (grab ingredient)
-         (squeeze)
-         (add-to-bowl))
-       :ok)
-     (error "This function only works on squeezed ingredients. You asked me to squeeze" ingredient)))
-  ([ingredient]
-   (add-squeezed ingredient 1)))
-
-(defn add-scooped
-  ([ingredient amount]
-   (if (scooped? ingredient)
-     (do
-       (dotimes [i amount]
-         (grab :cup)
-         (scoop ingredient)
-         (add-to-bowl)
-         (release))
-       :ok)
-     (error "This function only works on scooped ingredients. You asked me to scoop" ingredient)))
-  ([ingredient]
-   (add-scooped ingredient 1)))
-
-(defn add-simple
-  ([ingredient amount]
-   (if (simple? ingredient)
-     (do
-       (dotimes [i amount]
-         (grab ingredient)
-         (add-to-bowl))
-       :ok)
-     (error "This function only works on simple ingredients. You asked me to add" ingredient)))
-  ([ingredient]
-   (add-simple ingredient 1)))
+    (get info :usage)))
 
 (defn add
   ([ingredient]
-   (add ingredient 1))
+    (add ingredient 1))
   ([ingredient amount]
-   (cond
-     (squeezed? ingredient)
-     (add-squeezed ingredient amount)
-     (scooped? ingredient)
-     (add-scooped ingredient amount)
-     (simple? ingredient)
-     (add-simple ingredient amount)
-     :else
-     (error "I do not know the ingredient" ingredient))))
+    (let [ingredient-type (usage-type ingredient)]
+      (if (contains? usage ingredient-type)
+        (let [f (get usage ingredient-type)]
+          (f ingredient amount))
+        (error "I do not know the ingredient" ingredient)))))
 
 (defn perform [ingredients step]
   (cond
