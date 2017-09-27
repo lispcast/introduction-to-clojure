@@ -109,6 +109,11 @@
     :else
     (error "I do not know how to" (first step))))
 
+(defn bake-recipe [recipe]
+  (last
+    (for [step (get recipe :steps)]
+      (perform (get recipe :ingredients) step))))
+
 (def pantry-ingredients #{:flour :sugar :cocoa})
 
 (defn from-pantry? [ingredient]
