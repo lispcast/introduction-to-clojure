@@ -16,8 +16,11 @@
                                        [:cool]]}}})
 
 (defn perform [step]
-  (when (= :cool (first step))
-    (cool-pan)))
+  (cond
+    (= :cool (first step))
+    (cool-pan)
+    (= :mix (first step))
+    (mix)))
 
 (def scooped-ingredients #{:flour :sugar :milk :cocoa})
 
