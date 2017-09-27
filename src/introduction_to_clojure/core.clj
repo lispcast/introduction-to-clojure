@@ -158,14 +158,21 @@
 (defn order->ingredients [order]
   (let [items (get order :items)]
     (add-ingredients
-      (multiply-ingredients (get items :cake 0) {:egg 2
-                                                 :flour 2
-                                                 :sugar 1
-                                                 :milk 1})
-      (multiply-ingredients (get items :cookie 0) {:egg 1
-                                                   :flour 1
-                                                   :butter 1
-                                                   :sugar 1}))))
+      (multiply-ingredients (get items :brownies 0) {:butter 2
+                                                     :sugar 1
+                                                     :cocoa 2
+                                                     :flour 2
+                                                     :egg 2
+                                                     :milk 1})
+      (add-ingredients
+        (multiply-ingredients (get items :cake 0) {:egg 2
+                                                   :flour 2
+                                                   :sugar 1
+                                                   :milk 1})
+        (multiply-ingredients (get items :cookie 0) {:egg 1
+                                                     :flour 1
+                                                     :butter 1
+                                                     :sugar 1})))))
 
 (defn orders->ingredients [orders]
   (reduce add-ingredients {}
@@ -192,17 +199,35 @@
   (bake-pan 30)
   (cool-pan))
 
+(defn bake-brownies []
+  (add :butter 2)
+  (add :sugar 1)
+  (add :cocoa 2)
+
+  (mix)
+
+  (add :flour 2)
+  (add :egg 2)
+  (add :milk 1)
+
+  (mix)
+  (pour-into-pan)
+  (bake-pan 35)
+  (cool-pan))
+
 (defn bake [item]
   (cond
     (= item :cake)
     (bake-cake)
     (= item :cookies)
     (bake-cookies)
+    (= item :brownies)
+    (bake-brownies)
     :else
     (error "I don't know how to bake" item)))
 
 (defn day-at-the-bakery []
-  (let [orders (get-morning-orders)
+  (let [orders (get-morning-orders-day3)
         ingredients (orders->ingredients orders)]
     (fetch-list ingredients)
     (doseq [order orders]
