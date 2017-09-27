@@ -20,7 +20,11 @@
     (= :cool (first step))
     (cool-pan)
     (= :mix (first step))
-    (mix)))
+    (mix)
+    (= :pour (first step))
+    (pour-into-pan)
+    (= :bake (first step))
+    (bake-pan (second step))))
 
 (def scooped-ingredients #{:flour :sugar :milk :cocoa})
 
