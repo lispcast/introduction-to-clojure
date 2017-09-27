@@ -84,6 +84,30 @@
           (f ingredient amount))
         (error "I do not know the ingredient" ingredient)))))
 
+(def actions {:cool (fn [ingredients step]
+                      (cool-pan))
+              :mix  (fn [ingredients step]
+                      (mix))
+              :pour (fn [ingredients step]
+                      (pour-into-pan))
+              :bake (fn [ingredients step]
+                      (bake-pan (second step)))
+              :add  (fn [ingredients step]
+                      (cond
+                        (and (= 2 (count step))
+                             (= :all (second step)))
+                          (doseq [kv ingredients]
+                            (add (first kv) (second kv)))
+                        (and (= 2 (count step))
+                             (contains? ingredients (second step)))
+                        (add (second step) (get ingredients (second step)))
+                        (= 3 (count step))
+                        (add (second step) (get step 2))
+                        :else
+                        (error "I don't know how to add" (second step) (get step 2))))})
+
+
+
 (defn perform [ingredients step]
   (cond
     (= :cool (first step))
