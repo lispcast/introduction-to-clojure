@@ -5,6 +5,16 @@
   (apply println args)
   :error)
 
+(def baking  {:recipes {:cake {:ingredients {:egg   2
+                                             :flour 2
+                                             :sugar 1
+                                             :milk  1}
+                               :steps [[:add :all]
+                                       [:mix]
+                                       [:pour]
+                                       [:bake 25]
+                                       [:cool]]}}})
+
 (def scooped-ingredients #{:flour :sugar :milk :cocoa})
 
 (defn scooped? [ingredient]
