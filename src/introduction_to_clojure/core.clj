@@ -116,16 +116,6 @@
     (for [step (get recipe :steps)]
       (perform (get recipe :ingredients) step))))
 
-(def pantry-ingredients #{:flour :sugar :cocoa})
-
-(defn from-pantry? [ingredient]
-  (contains? pantry-ingredients ingredient))
-
-(def fridge-ingredients #{:milk :egg :butter})
-
-(defn from-fridge? [ingredient]
-  (contains? fridge-ingredients ingredient))
-
 (defn load-up-amount [ingredient amount]
   (dotimes [i amount]
     (load-up ingredient)))
@@ -187,42 +177,6 @@
   (reduce add-ingredients {}
     (for [order orders]
       (order->ingredients order))))
-
-(defn bake-cake []
-  (add :egg 2)
-  (add :flour 2)
-  (add :milk 1)
-  (add :sugar 1)
-  (mix)
-  (pour-into-pan)
-  (bake-pan 25)
-  (cool-pan))
-
-(defn bake-cookies []
-  (add :egg 1)
-  (add :flour 1)
-  (add :sugar 1)
-  (add :butter 1)
-  (mix)
-  (pour-into-pan)
-  (bake-pan 30)
-  (cool-pan))
-
-(defn bake-brownies []
-  (add :butter 2)
-  (add :sugar 1)
-  (add :cocoa 2)
-
-  (mix)
-
-  (add :flour 2)
-  (add :egg 2)
-  (add :milk 1)
-
-  (mix)
-  (pour-into-pan)
-  (bake-pan 35)
-  (cool-pan))
 
 (defn bake [item]
   (let [recipes (get baking :recipes)]
