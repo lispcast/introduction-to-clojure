@@ -257,15 +257,8 @@
   (cool-pan))
 
 (defn bake [item]
-  (cond
-    (= item :cake)
-    (bake-cake)
-    (= item :cookies)
-    (bake-cookies)
-    (= item :brownies)
-    (bake-brownies)
-    :else
-    (error "I don't know how to bake" item)))
+  (let [recipes (get baking :recipes)]
+    (bake-recipe (get recipes item))))
 
 (defn day-at-the-bakery []
   (let [orders (get-morning-orders-day3)
