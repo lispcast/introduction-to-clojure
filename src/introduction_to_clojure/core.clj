@@ -184,13 +184,15 @@
           (unload-amount ingredient amount))
         (error "I don't know the ingredient" ingredient)))))
 
-(defn storage-location [item-amount]
+(defn storage-location [ingredient]
   (let [ingredients (get baking :ingredients)
-        info (get ingredients (first item-amount))]
+        info (get ingredients ingredient)]
     (get info :storage)))
 
 (defn fetch-list [shopping]
-  (let [by-location (group-by storage-location shopping)]
+  (let [by-location (group-by (fn [item-amount]
+                                (storage-location (first item-amount)))
+                              shopping)]
     (doseq [loc by-location]
       (go-to (first loc))
       (doseq [item-amount (second loc)]
