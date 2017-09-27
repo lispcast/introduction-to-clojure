@@ -37,7 +37,7 @@
       (= 2 (count step))
       (add (second step) (get step 2))
       :else
-      (error "I don't know how to add" (second step) (third step)))
+      (error "I don't know how to add" (second step) (get step 2)))
     :else
     (error "I do not know how to" (first step))))
 
