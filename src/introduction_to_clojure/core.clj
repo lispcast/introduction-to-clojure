@@ -15,7 +15,7 @@
                                        [:bake 25]
                                        [:cool]]}}})
 
-(defn perform [step]
+(defn perform [ingredients step]
   (cond
     (= :cool (first step))
     (cool-pan)
@@ -24,7 +24,22 @@
     (= :pour (first step))
     (pour-into-pan)
     (= :bake (first step))
-    (bake-pan (second step))))
+    (bake-pan (second step))
+    (= :add (first step))
+    (cond
+      (and (= 1 (count step))
+           (= :all (second step)))
+      (doseq [kv ingredients]
+        (add (first kv) (second kv)))
+      (and (= 1 (count step))
+           (contains? ingredients (second step)))
+      (add (second step) (get ingredients (second step)))
+      (= 2 (count step))
+      (add (second step) (get step 2))
+      :else
+      (error "I don't know how to add" (second step) (third step)))
+    :else
+    (error "I do not know how to" (first step))))
 
 (def scooped-ingredients #{:flour :sugar :milk :cocoa})
 
