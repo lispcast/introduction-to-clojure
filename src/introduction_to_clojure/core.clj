@@ -27,14 +27,14 @@
     (bake-pan (second step))
     (= :add (first step))
     (cond
-      (and (= 1 (count step))
+      (and (= 2 (count step))
            (= :all (second step)))
       (doseq [kv ingredients]
         (add (first kv) (second kv)))
-      (and (= 1 (count step))
+      (and (= 2 (count step))
            (contains? ingredients (second step)))
       (add (second step) (get ingredients (second step)))
-      (= 2 (count step))
+      (= 3 (count step))
       (add (second step) (get step 2))
       :else
       (error "I don't know how to add" (second step) (get step 2)))
