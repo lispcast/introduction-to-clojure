@@ -15,6 +15,10 @@
                                        [:bake 25]
                                        [:cool]]}}})
 
+(defn perform [step]
+  (when (= :cool (first step))
+    (cool-pan)))
+
 (def scooped-ingredients #{:flour :sugar :milk :cocoa})
 
 (defn scooped? [ingredient]
