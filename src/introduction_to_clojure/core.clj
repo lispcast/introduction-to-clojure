@@ -5,7 +5,7 @@
   (apply println args)
   :error)
 
-(def scooped-ingredients #{:flour :sugar :milk})
+(def scooped-ingredients #{:flour :sugar :milk :cocoa})
 
 (defn scooped? [ingredient]
   (contains? scooped-ingredients ingredient))
@@ -73,7 +73,7 @@
      :else
      (error "I do not know the ingredient" ingredient))))
 
-(def pantry-ingredients #{:flour :sugar})
+(def pantry-ingredients #{:flour :sugar :cocoa})
 
 (defn from-pantry? [ingredient]
   (contains? pantry-ingredients ingredient))
