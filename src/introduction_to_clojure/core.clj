@@ -54,17 +54,17 @@
                                     :usage :scooped}}})
 
 (defn scooped? [ingredient]
-  (let [ingredients (get baking :ingredient)
+  (let [ingredients (get baking :ingredients)
         info (get ingredients ingredient)]
     (= :scooped (get info :usage))))
 
 (defn squeezed? [ingredient]
-  (let [ingredients (get baking :ingredient)
+  (let [ingredients (get baking :ingredients)
         info (get ingredients ingredient)]
     (= :squeezed (get info :usage))))
 
 (defn simple? [ingredient]
-  (let [ingredients (get baking :ingredient)
+  (let [ingredients (get baking :ingredients)
         info (get ingredients ingredient)]
     (= :simple (get info :usage))))
 
