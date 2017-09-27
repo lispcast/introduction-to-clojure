@@ -39,7 +39,19 @@
                                            [:mix]
                                            [:pour]
                                            [:bake 35]
-                                           [:cool]]}}})
+                                           [:cool]]}}
+              :ingredients {:egg {:storage :fridge
+                                  :usage :squeezed}
+                            :milk {:storage :fridge
+                                   :usage :scooped}
+                            :flour {:storage :pantry
+                                    :usage :scooped}
+                            :butter {:storage :fridge
+                                     :usage :simple}
+                            :sugar {:storage :pantry
+                                    :usage :scooped}
+                            :cocoa {:storage :pantry
+                                    :usage :scooped}}})
 
 (def scooped-ingredients #{:flour :sugar :milk :cocoa})
 
