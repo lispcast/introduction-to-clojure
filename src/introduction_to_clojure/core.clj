@@ -15,32 +15,6 @@
                                        [:bake 25]
                                        [:cool]]}}})
 
-(defn perform [ingredients step]
-  (cond
-    (= :cool (first step))
-    (cool-pan)
-    (= :mix (first step))
-    (mix)
-    (= :pour (first step))
-    (pour-into-pan)
-    (= :bake (first step))
-    (bake-pan (second step))
-    (= :add (first step))
-    (cond
-      (and (= 2 (count step))
-           (= :all (second step)))
-      (doseq [kv ingredients]
-        (add (first kv) (second kv)))
-      (and (= 2 (count step))
-           (contains? ingredients (second step)))
-      (add (second step) (get ingredients (second step)))
-      (= 3 (count step))
-      (add (second step) (get step 2))
-      :else
-      (error "I don't know how to add" (second step) (get step 2)))
-    :else
-    (error "I do not know how to" (first step))))
-
 (def scooped-ingredients #{:flour :sugar :milk :cocoa})
 
 (defn scooped? [ingredient]
@@ -108,6 +82,32 @@
      (add-simple ingredient amount)
      :else
      (error "I do not know the ingredient" ingredient))))
+
+(defn perform [ingredients step]
+  (cond
+    (= :cool (first step))
+    (cool-pan)
+    (= :mix (first step))
+    (mix)
+    (= :pour (first step))
+    (pour-into-pan)
+    (= :bake (first step))
+    (bake-pan (second step))
+    (= :add (first step))
+    (cond
+      (and (= 2 (count step))
+           (= :all (second step)))
+      (doseq [kv ingredients]
+        (add (first kv) (second kv)))
+      (and (= 2 (count step))
+           (contains? ingredients (second step)))
+      (add (second step) (get ingredients (second step)))
+      (= 3 (count step))
+      (add (second step) (get step 2))
+      :else
+      (error "I don't know how to add" (second step) (get step 2)))
+    :else
+    (error "I do not know how to" (first step))))
 
 (def pantry-ingredients #{:flour :sugar :cocoa})
 
