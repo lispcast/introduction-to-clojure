@@ -6,11 +6,8 @@
   :plugins [[nightlight/lein-nightlight "2.4.1"]
             [org.clojure/core.unify "0.5.7"]]
   :dependencies [[org.clojure/clojure "1.10.0"]
-                 [lispcast/bakery "1.0.0"]]
-  :repl-options {:init (do
-                         (use 'bakery.core)
-                         (use 'introduction-to-clojure.core))
-                 :skip-default-init true}
-  
+                 [lispcast/bakery "1.0.0"]
+                 [com.bhauman/rebel-readline "0.1.4"]]
+  :aliases {"repl" ["trampoline" "run" "-m" "introduction-to-clojure.repl"]}
 
   :main introduction-to-clojure.core)
