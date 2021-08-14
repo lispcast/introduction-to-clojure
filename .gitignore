@@ -9,4 +9,4 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
-/.nightlight.edn
+.rebel_readline_history
