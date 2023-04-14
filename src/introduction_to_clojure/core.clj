@@ -29,12 +29,12 @@
   (add-to-bowl))
 
 (defn bake-cake []
-  (add-flour)
-  (add-flour)
-  (add-egg)
-  (add-egg)
-  (add-milk)
-  (add-sugar)
+  (add :flour)
+  (add :flour)
+  (add :egg)
+  (add :egg)
+  (add :milk)
+  (add :sugar)
 
   (mix)
   (pour-into-pan)
